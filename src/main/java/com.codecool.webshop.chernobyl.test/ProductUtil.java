@@ -1,5 +1,7 @@
 package com.codecool.webshop.chernobyl.test;
 
+import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +16,9 @@ public class ProductUtil extends BasePage {
 
     @FindBy(xpath = "//div[@id='products']//descendant::div[@class='card']") private List<WebElement> products;
 
+    public ProductUtil(WebDriver driver) {
+        super(driver);
+    }
     public boolean checkIfProductsExist() {
         waitFor(products.get(0), 10);
         return products != null;

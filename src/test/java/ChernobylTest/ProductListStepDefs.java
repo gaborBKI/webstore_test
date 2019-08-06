@@ -1,5 +1,6 @@
 package ChernobylTest;
 
+import com.codecool.webshop.chernobyl.test.DriverFactory;
 import com.codecool.webshop.chernobyl.test.ProductUtil;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -9,7 +10,7 @@ import static org.junit.Assert.*;
 
 
 public class ProductListStepDefs {
-    ProductUtil productUtil = new ProductUtil();
+    ProductUtil productUtil = new ProductUtil(DriverFactory.getWebDriver(System.getenv("BROWSER")));
     @Given("I have Products and a default Product Category in the application")
     public void iHaveProductsAndADefaultProductCategoryInTheApplication() {
     }
