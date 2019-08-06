@@ -1,8 +1,12 @@
+package ChernobylTest;
+
 import com.codecool.webshop.chernobyl.test.ProductUtil;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import static org.junit.Assert.*;
+
 
 public class ProductListStepDefs {
     ProductUtil productUtil = new ProductUtil();
@@ -20,10 +24,12 @@ public class ProductListStepDefs {
 
     @Then("ensure I can see a list of Products")
     public void ensureICanSeeAListOfProducts() {
+        assertTrue(productUtil.checkIfProductsExist());
     }
 
     @And("ensure that the following details are displayed: product title, description, image, price")
     public void ensureThatTheFollowingDetailsAreDisplayedProductTitleDescriptionImagePrice() {
+        assertFalse(productUtil.testDetailsOnProducts());
     }
 
 
