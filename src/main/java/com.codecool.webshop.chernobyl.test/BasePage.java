@@ -63,4 +63,8 @@ public abstract class BasePage {
     public String getElementText(WebElement element){
         return element.getText();
     }
+
+    public void refresh() {
+        driver.navigate().refresh();
+    }
 }

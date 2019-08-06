@@ -16,6 +16,7 @@ public class AddToShoppingCart {
     private static final Waiter waiter = new Waiter();
     private String productButtonToTest = "1";
     private String productName = "Fire Truck";
+    private String itemCounterId = "basketItemCounter";
 
     /*@BeforeAll
     public static void setUp(){
@@ -56,15 +57,14 @@ public class AddToShoppingCart {
 
     @And("ensure it stores this data on the server.")
     public void verifyProductDataPersistent() {
-        assertTrue(true);
+        CART_UTIL.open(System.getenv("BASE_URL"));
+        CART_UTIL.refresh();
+        assertNotNull(CART_UTIL.getElementById(itemCounterId).getText());
     }
 
     @And("ensure it displays the number of cart items in the Page header.")
     public void verifyCartDisplaysContentAmount() {
-        CART_UTIL.open(System.getenv("BASE_URL"));
-        String itemCounterId = "basketItemCounter";
         String itemCounter = CART_UTIL.getElementText(CART_UTIL.getElementById(itemCounterId));
         assertEquals("1", itemCounter);
-        CART_UTIL.close();
     }
 }
