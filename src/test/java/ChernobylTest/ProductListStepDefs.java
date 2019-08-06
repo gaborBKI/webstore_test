@@ -1,3 +1,5 @@
+package ChernobylTest;
+
 import com.codecool.webshop.chernobyl.test.ProductUtil;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
