@@ -40,7 +40,7 @@ public class AddToShoppingCart {
 
     @And("the Products have an Add to Cart button")
     public void verifyAddButtonExists() {
-        assertTrue(cartUtil.checkProductHasAddToCartButton(System.getenv("PRODUCT_BUTTON_ID")));
+        assertTrue(cartUtil.checkProductHasAddToCartButton());
     }
 
     @When("I click on the Add to Cart button of the {string} product")
