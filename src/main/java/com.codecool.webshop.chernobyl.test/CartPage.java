@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CartUtil extends BasePage {
+public class CartPage extends BasePage {
 
     @FindBy(id = "deleteAll") private WebElement deleteAllButton;
     @FindBy(id = "review") private WebElement backToHomeButton;
@@ -14,7 +14,7 @@ public class CartUtil extends BasePage {
     @FindBy(xpath = "//*[@id='review-table']/tbody/tr[@data-el_id='1']//td[@class='productTotal']") private WebElement elementPriceInCart;
 
 
-    public CartUtil(WebDriver driver) {
+    public CartPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
