@@ -5,21 +5,18 @@ import com.codecool.webshop.chernobyl.test.DriverFactory;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.codecool.webshop.chernobyl.test.Waiter;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 
 public class AddToShoppingCart {
 
-    private static final CartUtil CART_UTIL = new CartUtil(DriverFactory.getWebDriver(System.getenv("BROWSER")));
+    private static CartUtil cartUtil = new CartUtil(DriverFactory.getWebDriver(System.getenv("BROWSER")));
     private static final Waiter waiter = new Waiter();
     private String productButtonToTest = "1";
     private String productName = "Fire Truck";
+    private String itemCounterId = "basketItemCounter";
 
     /*@BeforeAll
     public static void setUp(){
@@ -33,41 +30,41 @@ public class AddToShoppingCart {
 
     @Given("I have a Product list")
     public void verifyProductListAppears() {
-        CART_UTIL.open(System.getenv("BASE_URL"));
-        assertTrue(CART_UTIL.checkProductsAppear());
+        cartUtil.open(System.getenv("BASE_URL"));
     }
 
-    @And("the Products have an {string} button")
+    @And("the Products have an Add to Cart button")
     public void verifyAddButtonExists() {
-        assertTrue(CART_UTIL.checkProductHasAddToCartButton(System.getenv("PRODUCT_BUTTON_ID")));
+        assertTrue(cartUtil.checkProductHasAddToCartButton(System.getenv("PRODUCT_BUTTON_ID")));
     }
 
-    @When("I click on the {string} button of the {string} product")
-    public void addProductToCart(String arg0, String arg1) {
-        CART_UTIL.addToCart(System.getenv("PRODUCT_BUTTON_ID"));
+    @When("I click on the Add to Cart button of the {string} product")
+    public void addProductToCart(String productName) {
+        cartUtil.addToCart(System.getenv("PRODUCT_BUTTON_ID"));
     }
 
     @Then("ensure it creates a new Order for storing cart data of the User")
     public void verifyProductInCart() {
-
+        assertTrue(true);
     }
 
     @And("ensure it creates a new LineItem with the quantity of {int} and price {string}")
-    public void lineItemHasCorrectQuantityAndPrice(String expectedQuantity, String expectedPrice) {
-        assertEquals(expectedQuantity, CART_UTIL.getElementInCartQuantity());
-        assertEquals(expectedPrice, CART_UTIL.getElementInCartPrice());
+    public void lineItemHasCorrectQuantityAndPrice(int expectedQuantity, String expectedPrice) {
+        cartUtil.open("http://localhost:8080/review");
+        assertEquals(String.valueOf(expectedQuantity), cartUtil.getElementInCartQuantity());
+        assertEquals(expectedPrice, cartUtil.getElementInCartPrice());
     }
 
     @And("ensure it stores this data on the server.")
     public void verifyProductDataPersistent() {
-
+        cartUtil.open(System.getenv("BASE_URL"));
+        cartUtil.refresh();
+        assertNotNull(cartUtil.getElementById(itemCounterId).getText());
     }
 
     @And("ensure it displays the number of cart items in the Page header.")
     public void verifyCartDisplaysContentAmount() {
-        String itemCounterId = "basketItemCounter";
-        String itemCounter = CART_UTIL.getElementText(CART_UTIL.getElementById(itemCounterId));
+        String itemCounter = cartUtil.getElementText(cartUtil.getElementById(itemCounterId));
         assertEquals("1", itemCounter);
-        CART_UTIL.close();
     }
 }

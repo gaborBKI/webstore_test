@@ -3,8 +3,8 @@ Feature: Add to cart
 
   Scenario Outline: Webshop is open.
     Given I have a Product list
-    And the Products have an "Add to cart" button
-    When I click on the "Add to cart" button of the "<Product Name>" product
+    And the Products have an Add to Cart button
+    When I click on the Add to Cart button of the "<Product Name>" product
     Then ensure it creates a new Order for storing cart data of the User
     And ensure it creates a new LineItem with the quantity of 1 and price "<Product Price>"
     And ensure it stores this data on the server.
@@ -13,5 +13,3 @@ Feature: Add to cart
     Examples:
       | Product Name            | Product Price |
       | Fire Engine             | 9990.0        |
-      | Police Car              | 6690.0        |
-      | Gas Mask                | 29.0          |
