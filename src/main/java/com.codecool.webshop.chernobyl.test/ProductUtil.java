@@ -10,17 +10,18 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class ProductUtil extends BasePage {
-    public ProductUtil() {
+
+
+    public ProductUtil(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 
     @FindBy(xpath = "//div[@id='products']//descendant::div[@class='card']") private List<WebElement> products;
 
-    public ProductUtil(WebDriver driver) {
-        super(driver);
-    }
+
     public boolean checkIfProductsExist() {
-        waitFor(products.get(0), 10);
+        Waiter.waitForElement(driver, products.get(0), 10);
         return products != null;
     }
 

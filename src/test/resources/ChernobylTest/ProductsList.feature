@@ -5,5 +5,5 @@ Feature: Products List
     Given I have Products and a default Product Category in the application
     When I open the root url
     Then ensure I can see a list of Products
-    And ensure that the following details are displayed: product title, description, image, price
+    Then ensure that the following details are displayed: product title, description, image, price
 

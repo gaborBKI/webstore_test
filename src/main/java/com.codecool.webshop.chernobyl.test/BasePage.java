@@ -3,10 +3,11 @@ package com.codecool.webshop.chernobyl.test;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 public abstract class BasePage {
 
-    private WebDriver driver;
+    protected WebDriver driver;
     private Waiter waiter;
 
     /*
@@ -18,7 +19,8 @@ public abstract class BasePage {
      */
 
     public BasePage(WebDriver driver) {
-        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        this.driver=driver;
         waiter = new Waiter();
     }
 

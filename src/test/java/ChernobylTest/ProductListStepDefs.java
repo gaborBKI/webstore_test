@@ -28,7 +28,7 @@ public class ProductListStepDefs {
         assertTrue(productUtil.checkIfProductsExist());
     }
 
-    @And("ensure that the following details are displayed: product title, description, image, price")
+    @Then("ensure that the following details are displayed: product title, description, image, price")
     public void ensureThatTheFollowingDetailsAreDisplayedProductTitleDescriptionImagePrice() {
         assertFalse(productUtil.testDetailsOnProducts());
     }
