@@ -5,67 +5,56 @@ import com.codecool.webshop.chernobyl.test.CartPage;
 import com.codecool.webshop.chernobyl.test.DriverFactory;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.codecool.webshop.chernobyl.test.Waiter;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.java.After;
 
 public class AddToShoppingCart {
 
-    private static CartPage cartpage = new CartPage(DriverFactory.getWebDriver(System.getenv("BROWSER")));
+    private static CartPage cartPage = new CartPage(DriverFactory.getWebDriver(BasePage.getBrowser()));
     private String itemCounterId = "basketItemCounter";
-
-    @After // ???
-    public static void tearDown(){
-        cartpage.close();
-    }
 
     @Given("my cart in the shop is empty.")
     public void emptyCart() {
-        cartpage.open(BasePage.getBaseUrl() + "review");
-        cartpage.emptyCart();
-    }
-
-    @And("I am on the index page.")
-    public void iAmOnTheIndexPage() {
-        cartpage.backToIndex();
+        cartPage.open(BasePage.getBaseUrl() + "review");
+        cartPage.emptyCart();
+        cartPage.backToIndex();
     }
 
     @Given("I have a Product list")
     public void verifyProductListAppears() {
-        cartpage.open(BasePage.getBaseUrl());
-        assertTrue(true);
+        assertNotNull(cartPage.getProductList());
     }
 
     @And("the Products have an Add to Cart button")
     public void verifyAddButtonExists() {
-        assertTrue(cartpage.checkProductHasAddToCartButton());
+        assertTrue(cartPage.checkProductHasAddToCartButton());
     }
 
     @When("I click on the Add to Cart button of the {string} product")
     public void addProductToCart(String productName) {
-        cartpage.addItemToCart();
+        cartPage.addItemToCart();
     }
 
     @Then("ensure it creates a new LineItem with the quantity of {int} and price {string}")
     public void lineItemHasCorrectQuantityAndPrice(int expectedQuantity, String expectedPrice) {
-        cartpage.openShoppingCart();
-        assertEquals(String.valueOf(expectedQuantity), cartpage.getElementInCartQuantity());
-        assertEquals(expectedPrice, cartpage.getElementInCartPrice());
+        cartPage.openShoppingCart();
+        assertEquals(String.valueOf(expectedQuantity), cartPage.getElementInCartQuantity());
+        assertEquals(expectedPrice, cartPage.getElementInCartPrice());
     }
 
     @And("ensure it stores this data on the server.")
     public void verifyProductDataPersistent() {
-        cartpage.open(BasePage.getBaseUrl());
-        cartpage.refresh();
-        assertNotNull(cartpage.getElementById(itemCounterId).getText());
+        cartPage.backToIndex();
+        cartPage.refresh();
+        assertNotNull(cartPage.getElementById(itemCounterId).getText());
     }
 
     @And("ensure it displays the number of cart items in the Page header.")
     public void verifyCartDisplaysContentAmount() {
-        String itemCounter = cartpage.getElementText(cartpage.getElementById(itemCounterId));
+        String itemCounter = cartPage.getElementText(cartPage.getElementById(itemCounterId));
         assertEquals("1", itemCounter);
     }
 }
