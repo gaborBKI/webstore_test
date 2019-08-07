@@ -9,10 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ProductUtil extends BasePage {
+public class ProductPage extends BasePage {
 
 
-    public ProductUtil(WebDriver driver) {
+    public ProductPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
