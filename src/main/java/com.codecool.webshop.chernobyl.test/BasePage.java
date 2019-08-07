@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public abstract class BasePage {
 
+    private static final String BASE_URL = "http://localhost:8080/";
+
     @FindBy(id = "products") private WebElement products;
     @FindBy(id = "1") private WebElement addFireTruckButton;
     @FindBy(id = "shopping_cart") private WebElement shoppingCart;
@@ -25,6 +27,10 @@ public abstract class BasePage {
     public BasePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver=driver;
+    }
+
+    public static String getBaseUrl() {
+        return BASE_URL;
     }
 
     public void open(String url){
@@ -49,7 +55,7 @@ public abstract class BasePage {
         return true;
     };
 
-    public void addToCart(String productButtonId){
+    public void addItemToCart(){
         try {
             Waiter.waitForElement(driver, addFireTruckButton).click();
         } catch (TimeoutException e){

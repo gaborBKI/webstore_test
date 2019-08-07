@@ -7,11 +7,15 @@ import org.openqa.selenium.support.PageFactory;
 
 public class CartPage extends BasePage {
 
+    private static final String ELEM_XPATH_BASE = "//*[@id='review-table']/tbody/tr[@data-el_id='1']";
+
     @FindBy(id = "deleteAll") private WebElement deleteAllButton;
     @FindBy(id = "review") private WebElement backToHomeButton;
-    @FindBy(xpath = "//*[@id='review-table']/tbody/tr[@data-el_id='1']") private WebElement elementInCart;
-    @FindBy(xpath = "//*[@id='review-table']/tbody/tr[@data-el_id='1']//a") private WebElement amountInCart;
-    @FindBy(xpath = "//*[@id='review-table']/tbody/tr[@data-el_id='1']//td[@class='productTotal']") private WebElement elementPriceInCart;
+    @FindBy(id = "money") private WebElement totalPrice;
+    @FindBy(xpath = ELEM_XPATH_BASE) private WebElement elementInCart;
+    @FindBy(xpath = ELEM_XPATH_BASE + "//td[@class='productNames']") private WebElement elementName;
+    @FindBy(xpath = ELEM_XPATH_BASE + "//a") private WebElement amountInCart;
+    @FindBy(xpath = ELEM_XPATH_BASE + "//td[@class='productTotal']") private WebElement elementPriceInCart;
 
 
     public CartPage(WebDriver driver) {
@@ -35,5 +39,21 @@ public class CartPage extends BasePage {
 
     public void backToIndex() {
         Waiter.waitForElement(driver, backToHomeButton, 10).click();
+    }
+
+    public String getItemNameInCart() {
+        return Waiter.waitForElement(driver, elementName).getText();
+    }
+
+    public String getItemQuantityInCart() {
+        return Waiter.waitForElement(driver, amountInCart).getText();
+    }
+
+    public String getItemPriceInCart() {
+        return Waiter.waitForElement(driver, elementPriceInCart).getText();
+    }
+
+    public String getTotalPriceOfCart(){
+        return Waiter.waitForElement(driver, totalPrice).getText();
     }
 }

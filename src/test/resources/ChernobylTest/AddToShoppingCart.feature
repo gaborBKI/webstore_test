@@ -3,7 +3,6 @@ Feature: Add to cart
 
   Background:
     Given my cart in the shop is empty.
-    And I am on the index page.
 
   Scenario Outline: Webshop is open.
     Given I have a Product list

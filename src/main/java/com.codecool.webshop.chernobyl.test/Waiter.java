@@ -15,6 +15,11 @@ public class Waiter {
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.id(id)));
     }
 
+    public static WebElement waitForElementByText(WebDriver driver, String text){
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table[@id='review-table']//td[text()=" + text + "]")));
+    }
+
     public static WebElement waitForElement(WebDriver driver, WebElement element, int time ){
         WebDriverWait wait = new WebDriverWait(driver, time);
         return wait.until(ExpectedConditions.visibilityOf(element));
