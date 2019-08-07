@@ -5,6 +5,7 @@ import com.codecool.webshop.chernobyl.test.DriverFactory;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.codecool.webshop.chernobyl.test.Waiter;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -14,19 +15,23 @@ public class AddToShoppingCart {
 
     private static final CartUtil cartUtil = new CartUtil(DriverFactory.getWebDriver(System.getenv("BROWSER")));
     private static final Waiter waiter = new Waiter();
-    private String productButtonToTest = "1";
-    private String productName = "Fire Truck";
     private String itemCounterId = "basketItemCounter";
 
-    /*@BeforeAll
-    public static void setUp(){
-        CART_UTIL.open(System.getenv("BASE_URL"));
+    @After // ???
+    public static void tearDown(){
+        cartUtil.close();
     }
 
-    @AfterAll // ???
-    public static void tearDown(){
-        CART_UTIL.close();
-    }*/
+    @Given("my cart in the shop is empty.")
+    public void emptyCart() {
+        cartUtil.open(System.getenv("BASE_URL") + "review");
+        cartUtil.emptyCart();
+    }
+
+    @And("I am on the index page.")
+    public void iAmOnTheIndexPage() {
+        cartUtil.backToIndex();
+    }
 
     @Given("I have a Product list")
     public void verifyProductListAppears() {

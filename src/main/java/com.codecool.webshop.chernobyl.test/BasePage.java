@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public abstract class BasePage {
 
+    @FindBy(id = "products") private WebElement products;
     @FindBy(id = "1") private WebElement addFireTruckButton;
     @FindBy(id = "shopping_cart") private WebElement shoppingCart;
 
@@ -30,13 +31,9 @@ public abstract class BasePage {
         driver.get(url);
     }
 
-    public void close(){
-        driver.quit();
-    };
-
     public boolean checkProductsAppear(){
         try {
-            Waiter.waitForElementById(driver, "products");
+            Waiter.waitForElement(driver, products, 10);
         } catch (TimeoutException e){
             return false;
         }
@@ -45,7 +42,7 @@ public abstract class BasePage {
 
     public boolean checkProductHasAddToCartButton(String productButtonId){
         try {
-            Waiter.waitForElementById(driver, productButtonId);
+            Waiter.waitForElement(driver, addFireTruckButton, 10);
         } catch (TimeoutException e){
             return false;
         }
@@ -75,4 +72,8 @@ public abstract class BasePage {
     public void refresh() {
         driver.navigate().refresh();
     }
+
+    public void close(){
+        driver.quit();
+    };
 }
