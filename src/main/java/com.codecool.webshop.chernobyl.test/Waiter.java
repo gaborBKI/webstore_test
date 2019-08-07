@@ -20,4 +20,9 @@ public class Waiter {
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public static WebElement waitForElement(WebDriver driver, WebElement element ){
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
 }

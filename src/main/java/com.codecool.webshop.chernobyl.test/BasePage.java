@@ -33,16 +33,16 @@ public abstract class BasePage {
 
     public boolean checkProductsAppear(){
         try {
-            Waiter.waitForElement(driver, products, 10);
+            Waiter.waitForElement(driver, products);
         } catch (TimeoutException e){
             return false;
         }
         return true;
     }
 
-    public boolean checkProductHasAddToCartButton(String productButtonId){
+    public boolean checkProductHasAddToCartButton(){
         try {
-            Waiter.waitForElement(driver, addFireTruckButton, 10);
+            Waiter.waitForElement(driver, addFireTruckButton);
         } catch (TimeoutException e){
             return false;
         }
@@ -51,7 +51,7 @@ public abstract class BasePage {
 
     public void addToCart(String productButtonId){
         try {
-            Waiter.waitForElement(driver, addFireTruckButton, 10).click();
+            Waiter.waitForElement(driver, addFireTruckButton).click();
         } catch (TimeoutException e){
             throw new TimeoutException("Element not found");
         }
