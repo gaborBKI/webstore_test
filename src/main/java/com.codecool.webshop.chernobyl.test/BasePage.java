@@ -3,12 +3,15 @@ package com.codecool.webshop.chernobyl.test;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public abstract class BasePage {
 
+    @FindBy(id = "1") private WebElement addFireTruckButton;
+    @FindBy(id = "shopping_cart") private WebElement shoppingCart;
+
     protected WebDriver driver;
-    private Waiter waiter;
 
     /*
 
@@ -21,7 +24,6 @@ public abstract class BasePage {
     public BasePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver=driver;
-        waiter = new Waiter();
     }
 
     public void open(String url){
@@ -34,7 +36,7 @@ public abstract class BasePage {
 
     public boolean checkProductsAppear(){
         try {
-            waiter.waitForElementById(driver, "products");
+            Waiter.waitForElementById(driver, "products");
         } catch (TimeoutException e){
             return false;
         }
@@ -43,7 +45,7 @@ public abstract class BasePage {
 
     public boolean checkProductHasAddToCartButton(String productButtonId){
         try {
-            waiter.waitForElementById(driver, productButtonId);
+            Waiter.waitForElementById(driver, productButtonId);
         } catch (TimeoutException e){
             return false;
         }
@@ -52,18 +54,22 @@ public abstract class BasePage {
 
     public void addToCart(String productButtonId){
         try {
-            waiter.waitForElementById(driver, productButtonId).click();
+            Waiter.waitForElement(driver, addFireTruckButton, 10).click();
         } catch (TimeoutException e){
             throw new TimeoutException("Element not found");
         }
     }
 
     public WebElement getElementById(String id){
-        return waiter.waitForElementById(driver, id);
+        return Waiter.waitForElementById(driver, id);
     }
 
     public String getElementText(WebElement element){
         return element.getText();
+    }
+
+    public void openShoppingCart(){
+        shoppingCart.click();
     }
 
     public void refresh() {

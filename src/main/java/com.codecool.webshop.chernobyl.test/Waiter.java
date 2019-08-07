@@ -12,13 +12,12 @@ public class Waiter {
 
     public static WebElement waitForElementById(WebDriver driver, String id){
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(id)));
-        return element;
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.id(id)));
     }
 
-    public static void waitForElement(WebDriver driver, WebElement element, int time ){
+    public static WebElement waitForElement(WebDriver driver, WebElement element, int time ){
         WebDriverWait wait = new WebDriverWait(driver, time);
-        wait.until(ExpectedConditions.visibilityOf(element));
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
 }

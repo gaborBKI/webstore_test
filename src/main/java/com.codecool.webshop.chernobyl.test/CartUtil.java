@@ -18,10 +18,12 @@ public class CartUtil extends BasePage {
     }
 
     public String getElementInCartQuantity(){
+        Waiter.waitForElement(driver, elementPriceInCart, 10);
         return amountInCart.getText();
     }
 
     public String getElementInCartPrice(){
+        Waiter.waitForElement(driver, amountInCart, 10);
         return elementPriceInCart.getText();
     }
 }

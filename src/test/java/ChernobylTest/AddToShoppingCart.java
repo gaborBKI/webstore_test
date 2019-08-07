@@ -45,7 +45,7 @@ public class AddToShoppingCart {
 
     @Then("ensure it creates a new LineItem with the quantity of {int} and price {string}")
     public void lineItemHasCorrectQuantityAndPrice(int expectedQuantity, String expectedPrice) {
-        cartUtil.open("http://localhost:8080/review");
+        cartUtil.openShoppingCart();
         assertEquals(String.valueOf(expectedQuantity), cartUtil.getElementInCartQuantity());
         assertEquals(expectedPrice, cartUtil.getElementInCartPrice());
     }
