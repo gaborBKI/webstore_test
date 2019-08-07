@@ -5,8 +5,7 @@ Feature: Add to cart
     Given I have a Product list
     And the Products have an Add to Cart button
     When I click on the Add to Cart button of the "<Product Name>" product
-    Then ensure it creates a new Order for storing cart data of the User
-    And ensure it creates a new LineItem with the quantity of 1 and price "<Product Price>"
+    Then ensure it creates a new LineItem with the quantity of 1 and price "<Product Price>"
     And ensure it stores this data on the server.
     And ensure it displays the number of cart items in the Page header.
 

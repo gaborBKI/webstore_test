@@ -12,7 +12,7 @@ import cucumber.api.java.en.When;
 
 public class AddToShoppingCart {
 
-    private static CartUtil cartUtil = new CartUtil(DriverFactory.getWebDriver(System.getenv("BROWSER")));
+    private static final CartUtil cartUtil = new CartUtil(DriverFactory.getWebDriver(System.getenv("BROWSER")));
     private static final Waiter waiter = new Waiter();
     private String productButtonToTest = "1";
     private String productName = "Fire Truck";
@@ -43,12 +43,7 @@ public class AddToShoppingCart {
         cartUtil.addToCart(System.getenv("PRODUCT_BUTTON_ID"));
     }
 
-    @Then("ensure it creates a new Order for storing cart data of the User")
-    public void verifyProductInCart() {
-        assertTrue(true);
-    }
-
-    @And("ensure it creates a new LineItem with the quantity of {int} and price {string}")
+    @Then("ensure it creates a new LineItem with the quantity of {int} and price {string}")
     public void lineItemHasCorrectQuantityAndPrice(int expectedQuantity, String expectedPrice) {
         cartUtil.open("http://localhost:8080/review");
         assertEquals(String.valueOf(expectedQuantity), cartUtil.getElementInCartQuantity());
