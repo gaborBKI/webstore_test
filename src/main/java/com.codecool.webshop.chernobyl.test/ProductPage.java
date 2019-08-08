@@ -97,14 +97,4 @@ public class ProductPage extends BasePage {
             if(option.getText().equals(productName)) option.click();
         }
     }
-
-    public boolean catchServerError(){
-        try {
-            Waiter.waitForElement(driver, errorMessage, 3);
-        }
-        catch (TimeoutException noSuchElement){
-            System.out.println("Continue");
-        }
-        return errorMessage == null;
-    }
 }
