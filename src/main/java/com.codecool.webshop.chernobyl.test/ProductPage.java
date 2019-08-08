@@ -19,8 +19,9 @@ public class ProductPage extends BasePage {
     }
 
     @FindBy(xpath = "//div[@id='products']//descendant::div[@class='card']") private List<WebElement> products;
-    @FindBy(xpath = "//input[@id='filterBasket']//following-sibling::input") private WebElement filterSubbmitButton;
+    @FindBy(id = "productCat") private  WebElement productCatSelect;
     @FindBy(id = "supplierCat") private WebElement supplierCatSelect;
+    @FindBy(xpath = "//input[@id='filterBasket']//following-sibling::input") private WebElement filterSubbmitButton;
 
 
     public boolean checkIfProductsExist() {
@@ -53,8 +54,11 @@ public class ProductPage extends BasePage {
     }
 
     public void findSupplierDropDown() {
-        Waiter.waitForElement(driver, supplierCatSelect, 44);
+        Waiter.waitForElement(driver, supplierCatSelect, 4);
 
+    }
+    public void findCategoryDropDown(){
+        Waiter.waitForElement(driver, productCatSelect, 4);
     }
 
     public void selectSupplierName(String supplierName) {
@@ -76,4 +80,13 @@ public class ProductPage extends BasePage {
     public void clickToSearch() {
         filterSubbmitButton.click();
     }
+
+
+    public void selectProductCategory(String productName) {
+        Select productSelect = new Select(productCatSelect);
+        for (WebElement option : productSelect.getOptions()) {
+            if(option.getText().equals(productName)) option.click();
+        }
+    }
+
 }

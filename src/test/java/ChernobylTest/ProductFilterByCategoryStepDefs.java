@@ -7,35 +7,33 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.After;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ProductFilterBySupplierStepDefs {
+public class ProductFilterByCategoryStepDefs {
     private static ProductPage PRODUCT_PAGE = new ProductPage(DriverFactory.getWebDriver(System.getenv("BROWSER")));
 
-
-    @Given("I have Products and Suppliers listed on the index page")
-    public void iHaveProductsAndSuppliersListedOnTheIndexPage() {
+    @Given("I have Products and Product Categories listed on the index page")
+    public void iHaveProductsAndProductCategoriesListedOnTheIndexPage() {
         PRODUCT_PAGE.open("http://localhost:8080/");
-        PRODUCT_PAGE.findSupplierDropDown();
+        PRODUCT_PAGE.findCategoryDropDown();
+
     }
 
-
-    @When("I I click on a {string}")
-    public void iIClickOnA(String supplierName) {
-        PRODUCT_PAGE.selectSupplierName(supplierName);
+    @When("I I click on a Category's {string}")
+    public void iIClickOnACategoryS(String categoryName) {
+        PRODUCT_PAGE.selectProductCategory(categoryName);
         PRODUCT_PAGE.clickToSearch();
     }
 
-    @Then("ensure it displays the {string} only for the selected Supplier")
-    public void ensureItDisplaysTheProductsOnlyForTheSelectedSupplier(String expectedNumber) {
+    @Then("ensure it displays the {string} only in the selected Category")
+    public void ensureItDisplaysTheOnlyInTheSelectedCategory(String expectedNumber) {
         int actualNumber = PRODUCT_PAGE.countProducts();
         assertEquals(Integer.parseInt(expectedNumber), actualNumber);
+
     }
 
     @After
     public static void tearDown(){
         PRODUCT_PAGE.close();
     }
-
-
 }
