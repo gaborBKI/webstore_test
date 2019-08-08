@@ -1,11 +1,10 @@
-Feature: Add to cart
+Feature: Add item to cart
   Ensure that after clicking on an item's add to cart button it gets put into the cart and its quantity is displayed on the page header.
 
   Background:
     Given my cart in the shop is empty.
-    And I am on the index page.
 
-  Scenario Outline: Webshop is open.
+  Scenario Outline: Ensure that items can be added to the cart and their data is saved there.
     Given I have a Product list
     And the Products have an Add to Cart button
     When I click on the Add to Cart button of the "<Product Name>" product

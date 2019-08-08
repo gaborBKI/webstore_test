@@ -1,6 +1,5 @@
 package com.codecool.webshop.chernobyl.test;
 
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.By;
@@ -11,20 +10,18 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-public class ProductPage extends BasePage {
+public class ProductUtil extends BasePage {
 
 
-    public ProductPage(WebDriver driver) {
+    public ProductUtil(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
     @FindBy(xpath = "//div[@id='products']//descendant::div[@class='card']") private List<WebElement> products;
-    @FindBy(xpath = "//h2[text()='HTTP ERROR 500']") private WebElement errorMessage;
     @FindBy(id = "productCat") private  WebElement productCatSelect;
     @FindBy(id = "supplierCat") private WebElement supplierCatSelect;
     @FindBy(xpath = "//input[@id='filterBasket']//following-sibling::input") private WebElement filterSubbmitButton;
-
 
 
     public boolean checkIfProductsExist() {
@@ -74,11 +71,9 @@ public class ProductPage extends BasePage {
     public int countProducts() {
         try {
             Waiter.waitForElement(driver, products.get(0), 10);
+        } catch (IndexOutOfBoundsException e){
+            return 0;
         }
-        catch (IndexOutOfBoundsException error){
-            System.out.println(error);
-        }
-
         int counter = 0;
         for (WebElement product : products) {
             counter++;
@@ -97,4 +92,5 @@ public class ProductPage extends BasePage {
             if(option.getText().equals(productName)) option.click();
         }
     }
+
 }

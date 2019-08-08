@@ -6,11 +6,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.Objects;
+
 public abstract class BasePage {
+
+    private static final String BASE_URL = "http://localhost:8080/";
+    private static final String BROWSER = System.getenv("BROWSER");
 
     @FindBy(id = "products") private WebElement products;
     @FindBy(id = "1") private WebElement addFireTruckButton;
     @FindBy(id = "shopping_cart") private WebElement shoppingCart;
+    @FindBy(id = "products") private WebElement productList;
 
     protected WebDriver driver;
 
@@ -27,34 +33,38 @@ public abstract class BasePage {
         this.driver=driver;
     }
 
+    public static String getBaseUrl() {
+        return BASE_URL;
+    }
+
+    public static String getBrowser(){
+        return BROWSER;
+    }
+
     public void open(String url){
         driver.get(url);
+        driver.manage().window().maximize();
     }
 
-    public boolean checkProductsAppear(){
+    public boolean checkProductHasAddToCartButton(){
         try {
-            Waiter.waitForElement(driver, products, 10);
-        } catch (TimeoutException e){
-            return false;
-        }
-        return true;
-    }
-
-    public boolean checkProductHasAddToCartButton(String productButtonId){
-        try {
-            Waiter.waitForElement(driver, addFireTruckButton, 10);
+            Waiter.waitForElement(driver, addFireTruckButton);
         } catch (TimeoutException e){
             return false;
         }
         return true;
     };
 
-    public void addToCart(String productButtonId){
+    public void addItemToCart(){
         try {
-            Waiter.waitForElement(driver, addFireTruckButton, 10).click();
+            Objects.requireNonNull(Waiter.waitForElement(driver, addFireTruckButton)).click();
         } catch (TimeoutException e){
             throw new TimeoutException("Element not found");
         }
+    }
+
+    public WebElement getProductList(){
+        return Waiter.waitForElement(driver, productList);
     }
 
     public WebElement getElementById(String id){
@@ -73,7 +83,11 @@ public abstract class BasePage {
         driver.navigate().refresh();
     }
 
-    public void close(){
+    public void quit(){
         driver.quit();
+    };
+
+    public void closeWindow(){
+        driver.close();
     };
 }
