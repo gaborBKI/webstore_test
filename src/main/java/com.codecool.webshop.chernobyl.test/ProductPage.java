@@ -1,5 +1,6 @@
 package com.codecool.webshop.chernobyl.test;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.By;
@@ -19,9 +20,11 @@ public class ProductPage extends BasePage {
     }
 
     @FindBy(xpath = "//div[@id='products']//descendant::div[@class='card']") private List<WebElement> products;
+    @FindBy(xpath = "//h2[text()='HTTP ERROR 500']") private WebElement errorMessage;
     @FindBy(id = "productCat") private  WebElement productCatSelect;
     @FindBy(id = "supplierCat") private WebElement supplierCatSelect;
     @FindBy(xpath = "//input[@id='filterBasket']//following-sibling::input") private WebElement filterSubbmitButton;
+
 
 
     public boolean checkIfProductsExist() {
@@ -69,7 +72,13 @@ public class ProductPage extends BasePage {
     }
 
     public int countProducts() {
-        Waiter.waitForElement(driver, products.get(0), 10);
+        try {
+            Waiter.waitForElement(driver, products.get(0), 10);
+        }
+        catch (IndexOutOfBoundsException error){
+            System.out.println(error);
+        }
+
         int counter = 0;
         for (WebElement product : products) {
             counter++;
@@ -89,4 +98,13 @@ public class ProductPage extends BasePage {
         }
     }
 
+    public boolean catchServerError(){
+        try {
+            Waiter.waitForElement(driver, errorMessage, 3);
+        }
+        catch (TimeoutException noSuchElement){
+            System.out.println("Continue");
+        }
+        return errorMessage == null;
+    }
 }

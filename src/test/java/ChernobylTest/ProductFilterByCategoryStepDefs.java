@@ -8,6 +8,7 @@ import cucumber.api.java.en.When;
 import org.junit.After;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ProductFilterByCategoryStepDefs {
     private static ProductPage PRODUCT_PAGE = new ProductPage(DriverFactory.getWebDriver(System.getenv("BROWSER")));
@@ -23,6 +24,7 @@ public class ProductFilterByCategoryStepDefs {
     public void iIClickOnACategoryS(String categoryName) {
         PRODUCT_PAGE.selectProductCategory(categoryName);
         PRODUCT_PAGE.clickToSearch();
+        //assertFalse(PRODUCT_PAGE.catchServerError());
     }
 
     @Then("ensure it displays the {string} only in the selected Category")

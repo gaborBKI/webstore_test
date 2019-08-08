@@ -8,7 +8,7 @@ Feature: Filter Product By Product Category
     Then ensure it displays the "<number of Products>" only in the selected Category
     Examples:
       | title                   | number of Products  |
-      | Select Product Category |         0           |
+      | Select Product Category |         21           |
       | Vehicles                |         5           |
       | Relics                  |         5           |
       | Protector Suits         |         5           |
