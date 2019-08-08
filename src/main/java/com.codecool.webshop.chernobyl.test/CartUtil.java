@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.Objects;
 
-public class CartPage extends BasePage {
+public class CartUtil extends BasePage {
 
     private static final String ELEM_XPATH_BASE = "//*[@id='review-table']/tbody/tr[@data-el_id='1']";
 
@@ -20,7 +20,7 @@ public class CartPage extends BasePage {
     @FindBy(xpath = ELEM_XPATH_BASE + "//td[@class='productTotal']") private WebElement elementPriceInCart;
 
 
-    public CartPage(WebDriver driver) {
+    public CartUtil(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }

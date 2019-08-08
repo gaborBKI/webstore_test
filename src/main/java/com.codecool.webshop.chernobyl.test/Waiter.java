@@ -30,7 +30,6 @@ public class Waiter {
         } catch (TimeoutException e){
             return null;
         }
-
     }
 
 }

@@ -10,10 +10,10 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-public class ProductPage extends BasePage {
+public class ProductUtil extends BasePage {
 
 
-    public ProductPage(WebDriver driver) {
+    public ProductUtil(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
@@ -65,7 +65,11 @@ public class ProductPage extends BasePage {
     }
 
     public int countProducts() {
-        Waiter.waitForElement(driver, products.get(0), 10);
+        try {
+            Waiter.waitForElement(driver, products.get(0), 10);
+        } catch (IndexOutOfBoundsException e){
+            return 0;
+        }
         int counter = 0;
         for (WebElement product : products) {
             counter++;
