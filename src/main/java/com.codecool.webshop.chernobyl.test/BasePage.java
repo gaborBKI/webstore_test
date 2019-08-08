@@ -43,6 +43,7 @@ public abstract class BasePage {
 
     public void open(String url){
         driver.get(url);
+        driver.manage().window().maximize();
     }
 
     public boolean checkProductHasAddToCartButton(){

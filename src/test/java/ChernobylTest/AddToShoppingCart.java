@@ -56,5 +56,6 @@ public class AddToShoppingCart {
     public void verifyCartDisplaysContentAmount() {
         String itemCounter = cartPage.getElementText(cartPage.getElementById(itemCounterId));
         assertEquals("1", itemCounter);
+        cartPage.close();
     }
 }

@@ -31,6 +31,7 @@ public class ProductListStepDefs {
     @Then("ensure that the following details are displayed: product title, description, image, price")
     public void ensureThatTheFollowingDetailsAreDisplayedProductTitleDescriptionImagePrice() {
         assertFalse(productPage.testDetailsOnProducts());
+        productPage.close();
     }
 
 

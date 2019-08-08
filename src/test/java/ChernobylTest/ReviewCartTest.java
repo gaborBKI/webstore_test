@@ -38,6 +38,7 @@ public class ReviewCartTest {
     @And("ensure it displays the total price of all the items in the cart")
     public void ensureItDisplaysTheTotalPriceOfAllTheItemsInTheCart() {
         assertNotNull(cartPage.getTotalPriceOfCart());
+        cartPage.close();
     }
 
 }
