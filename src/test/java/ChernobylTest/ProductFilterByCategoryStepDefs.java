@@ -1,16 +1,15 @@
 package ChernobylTest;
 
 import com.codecool.webshop.chernobyl.test.DriverFactory;
-import com.codecool.webshop.chernobyl.test.ProductPage;
+import com.codecool.webshop.chernobyl.test.ProductUtil;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.After;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProductFilterByCategoryStepDefs {
-    private static ProductPage PRODUCT_PAGE = new ProductPage(DriverFactory.getWebDriver(System.getenv("BROWSER")));
+    private static ProductUtil PRODUCT_PAGE = new ProductUtil(DriverFactory.getWebDriver(System.getenv("BROWSER")));
 
     @Given("I have Products and Product Categories listed on the index page")
     public void iHaveProductsAndProductCategoriesListedOnTheIndexPage() {
@@ -29,11 +28,6 @@ public class ProductFilterByCategoryStepDefs {
     public void ensureItDisplaysTheOnlyInTheSelectedCategory(String expectedNumber) {
         int actualNumber = PRODUCT_PAGE.countProducts();
         assertEquals(Integer.parseInt(expectedNumber), actualNumber);
-
-    }
-
-    @After
-    public static void tearDown(){
-        PRODUCT_PAGE.close();
+        PRODUCT_PAGE.closeWindow();
     }
 }

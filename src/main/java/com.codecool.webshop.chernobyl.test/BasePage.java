@@ -83,7 +83,11 @@ public abstract class BasePage {
         driver.navigate().refresh();
     }
 
-    public void close(){
+    public void quit(){
         driver.quit();
+    };
+
+    public void closeWindow(){
+        driver.close();
     };
 }
