@@ -21,7 +21,7 @@ public class ProductUtil extends BasePage {
     @FindBy(xpath = "//div[@id='products']//descendant::div[@class='card']") private List<WebElement> products;
     @FindBy(id = "productCat") private  WebElement productCatSelect;
     @FindBy(id = "supplierCat") private WebElement supplierCatSelect;
-    @FindBy(xpath = "//input[@id='filterBasket']//following-sibling::input") private WebElement filterSubbmitButton;
+    @FindBy(id = "search") private WebElement filterSubbmitButton;
 
 
     public boolean checkIfProductsExist() {
