@@ -1,5 +1,6 @@
 package ChernobylTest;
 
+import com.codecool.webshop.chernobyl.test.BasePage;
 import com.codecool.webshop.chernobyl.test.DriverFactory;
 import com.codecool.webshop.chernobyl.test.ProductUtil;
 import cucumber.api.java.en.Given;
@@ -9,7 +10,7 @@ import static org.junit.Assert.*;
 
 
 public class ProductListStepDefs {
-    private ProductUtil productUtil = new ProductUtil(DriverFactory.getWebDriver(System.getenv("BROWSER")));
+    private ProductUtil productUtil = new ProductUtil(DriverFactory.getWebDriver(BasePage.getBrowser()));
 
     @Given("I have Products and a default Product Category in the application")
     public void iHaveProductsAndADefaultProductCategoryInTheApplication() {
@@ -29,7 +30,7 @@ public class ProductListStepDefs {
     @Then("ensure that the following details are displayed: product title, description, image, price")
     public void ensureThatTheFollowingDetailsAreDisplayedProductTitleDescriptionImagePrice() {
         assertFalse(productUtil.testDetailsOnProducts());
-        productUtil.quit();
+        productUtil.closeWindow();
     }
 
 
